@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import RatingStars from '../../../components/RatingStars';
-import trend6 from '/src/assets/trend6.avif';
+import trend6 from "../../../assets/trend6.avif";
 
 const SingleProduct = () => {
     const { id } = useParams();
