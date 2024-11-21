@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const authRouter = require('./src/users/user.route')
 
 app.use(express.json({ limit: '25mb' }));
 app.use(bodyParser.json());
@@ -17,6 +18,9 @@ app.use(
     credentials: true,
   })
 );
+app.use('/api/auth', authRouter)
+
+
 
 async function main() {
   try {

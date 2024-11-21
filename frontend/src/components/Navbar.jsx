@@ -6,8 +6,8 @@ import avatarImg from '../assets/avatar.png'
 import CartModal from '../pages/shop/CartModal'
 
 export default function Navbar() {
+	const { user } = useSelector((state) => state.auth)
 	const products = useSelector((state) => state.cart.products)
-
 	const [isCartOpen, setisCartOpen] = useState(false)
 
 	const handleCartToggle = () => {
@@ -57,13 +57,19 @@ export default function Navbar() {
 						</button>
 					</span>
 					<span>
-    <Link to='login'>
-        <img
-            src={avatarImg}
-            alt='User Avatar'
-            className='size-6 rounded-full cursor-pointer'
-        />
-    </Link>
+					{user && user ? (
+							<>
+								<img
+									src={user?.profileImage || avatarImg}
+									alt=''
+									className='size-6 rounded-full cursor-pointer'
+								/>
+							</>
+						) : (
+							<Link to='login'>
+								<i className='ri-user-line'></i>
+							</Link>
+						)}
 </span>
 
 				</div>
