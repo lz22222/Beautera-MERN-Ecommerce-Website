@@ -15,6 +15,7 @@ const filters = {
     ]
 };
 
+
 const ShopPage = () => {
     const [filtersState, setFiltersState] = useState({
         category: 'all',
@@ -26,7 +27,9 @@ const ShopPage = () => {
     const [ProductsPerPage] = useState(8);
 
     const { category, color, priceRange } = filtersState;
-    const [minPrice, maxPrice] = priceRange.split('-').map(Number);
+    const [minPrice, maxPrice] = priceRange
+    ? priceRange.split('-').map(Number)
+    : [undefined, undefined];
 
     const { data: { products = [], totalPages, totalProducts } = {}, error, isLoading } = useFetchAllProductsQuery({
         category: category !== 'all' ? category : '',
@@ -63,7 +66,9 @@ const ShopPage = () => {
         <>
             <section className='section__container bg-primary-light'>
                 <h2 className='section__header capitalize'>Shop Page</h2>
-                <p className='section__subheader'>Discover the Hottest Picks: Elevate Your Style with Our Curated Collection of Trending Beauty Products.</p>
+                <p className='section__subheader'>Discover the Hottest Picks: Elevate Your Style with Our Curated Collection of Trending Beauty Products.
+
+</p>
             </section>
 
             <section className='section__container'>

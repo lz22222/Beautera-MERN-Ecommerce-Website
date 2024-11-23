@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useFetchProductByIdQuery } from '../../../redux/features/products/productsApi';
-import { usePostReviewMutation } from '../../../redux/features/reviews/reviewsApi';
+import { usePostReviewMutation } from '../../../redux/features/reviewsApi';
 
 const PostAReview = ({isModalOpen, handleClose}) => {
     const {id} = useParams();
