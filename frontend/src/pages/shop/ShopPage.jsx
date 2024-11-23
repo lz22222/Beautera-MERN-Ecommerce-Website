@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import productsData from '../../data/products.json';
 import ProductCards from './ProductCards';
 import ShopFiltering from './ShopFiltering';
+import { useFetchAllProductsQuery } from '../../redux/features/productsApi'
 
 const filters = {
     categories: ['all', 'face', 'eyes', 'lips', 'cheek'],
@@ -15,13 +16,11 @@ const filters = {
 };
 
 const ShopPage = () => {
-    const [products, setProducts] = useState(productsData);
     const [filtersState, setFiltersState] = useState({
         category: 'all',
         color: 'all',
         priceRange: ''
     });
-
     const [currentPage, setCurrentPage] = useState(1);
     const [ProductsPerPage] = useState(8);
 
