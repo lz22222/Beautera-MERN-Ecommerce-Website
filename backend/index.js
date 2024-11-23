@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const authRouter = require('./src/users/user.route')
 const productRouter = require('./src/products/products.route')
+const reviewRouter = require('./src/reviews/reviews.router')
 
 app.use(express.json({ limit: '25mb' }));
 app.use(bodyParser.json());
@@ -21,6 +22,7 @@ app.use(
 );
 app.use('/api/auth', authRouter)
 app.use('/api/products', productRouter)
+app.use('/api/reviews', reviewRouter)
 
 async function main() {
   try {
