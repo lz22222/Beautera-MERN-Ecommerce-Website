@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useDispatch } from 'react-redux'
-
 import { removeFromCart, updateQuantity } from '../../redux/features/cart/cartSlice'
 import OrderSummary from './OrderSummary'
 import { getImageSrc } from '../../pages/shop/ProductCards';

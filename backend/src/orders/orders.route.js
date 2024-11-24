@@ -1,36 +1,36 @@
 const express = require("express");
 const Order = require("./orders.model");
-const verifyToken = require("../middleware/verifyToken");
-const verifyAdmin = require("../middleware/verifyAdmin");
+const verifyToken = require("../middleware/verify-token");
+const verifyAdmin = require("../middleware/verify-admin");
 const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-// create checkout session
+
 router.post("/create-checkout-session", async (req, res) => {
   const { products } = req.body;
 
   try {
-    const lineItems = products.map((product) => ({
-      price_data: {
-        currency: "usd",
-        product_data: {
-          name: product.name,
-          images: [product.image],
-        },
-        unit_amount: Math.round(product.price * 100),
+const lineItems = products.map((product) => {
+  return {
+    price_data: {
+      currency: "usd", 
+      product_data: {
+        name: product.name, 
       },
-      quantity: product.quantity,
-    }));
+      unit_amount: Math.round(product.price * 100), 
+    },
+    quantity: product.quantity, 
+  };
+});
 
+    
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
-      success_url:
-        "https://lebaba-frontend-final.vercel.app/success?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "https://lebaba-frontend-final.vercel.app/cancel",
+      success_url:"http://localhost:5173/success?session_id={CHECKOUT_SESSION_ID}",
+			cancel_url: "http://localhost:5173/cancel",
     });
-
     res.json({ id: session.id });
   } catch (error) {
     console.error("Error creating checkout session:", error);
@@ -38,7 +38,6 @@ router.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-//  confirm payment
 
 router.post("/confirm-payment", async (req, res) => {
   const { session_id } = req.body;
@@ -68,13 +67,15 @@ router.post("/confirm-payment", async (req, res) => {
         email: session.customer_details.email,
         status:
           session.payment_intent.status === "succeeded" ? "pending" : "failed",
+
+
+
       });
     } else {
       order.status =
         session.payment_intent.status === "succeeded" ? "pending" : "failed";
     }
 
-    // Save the order to MongoDB
     await order.save();
     //   console.log('Order saved to MongoDB', order);
 
@@ -85,9 +86,9 @@ router.post("/confirm-payment", async (req, res) => {
   }
 });
 
-// get order by email address
 router.get("/:email", async (req, res) => {
   const email = req.params.email;
+
   if (!email) {
     return res.status(400).send({ message: "Email is required" });
   }
@@ -96,6 +97,7 @@ router.get("/:email", async (req, res) => {
     const orders = await Order.find({ email: email });
 
     if (orders.length === 0 || !orders) {
+
       return res
         .status(400)
         .send({ orders: 0, message: "No orders found for this email" });
@@ -107,10 +109,10 @@ router.get("/:email", async (req, res) => {
   }
 });
 
-// get order by id
 router.get("/order/:id", async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
+
     if (!order) {
       return res.status(404).send({ message: "Order not found" });
     }
@@ -121,10 +123,10 @@ router.get("/order/:id", async (req, res) => {
   }
 });
 
-// get all orders
 router.get("/", async (req, res) => {
   try {
     const orders = await Order.find().sort({ createdAt: -1 });
+
     if (orders.length === 0) {
       return res.status(404).send({ message: "No orders found", orders: [] });
     }
@@ -136,7 +138,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// update order status
 router.patch("/update-order-status/:id", async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
@@ -172,7 +173,6 @@ router.patch("/update-order-status/:id", async (req, res) => {
   }
 });
 
-// delete order
 router.delete('/delete-order/:id', async( req, res) => {
   const { id } = req.params;
 
@@ -191,5 +191,6 @@ router.delete('/delete-order/:id', async( req, res) => {
     res.status(500).send({ message: "Failed to delete order" });
   }
 } )
+
 
 module.exports = router;
