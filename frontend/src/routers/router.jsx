@@ -9,6 +9,7 @@ import SingleProduct from "../pages/shop/productDetails/SingleProduct";
 import Login from '../components/Login'
 import Register from '../components/Register'
 import PaymentSuccess from '../components/PaymentSuccess'
+import DashboardLayout from "../pages/dashboard/DashboardLayout";
 import PrivateRoute from './PrivateRoute'
 
 const router = createBrowserRouter([
@@ -36,17 +37,67 @@ const router = createBrowserRouter([
 		element: <Register />,
 	},
   {
-		path: '/dashboard',
-		element: (
-			<PrivateRoute>
-				<DashboardLayout />
-			</PrivateRoute>
-		),
-		children: [
-			// user dashboard routes
-			{ path: '', element: <div>User Dashboard</div> },
-		],
-	},
+    path: '/dashboard',
+    element: <DashboardLayout />, // TODO: user private routes here
+    children: [
+      // user routes
+      { path: '', element: <div>User Dashboard</div> },
+      { path: 'orders', element: <div>User Orders</div> },
+      { path: 'payments', element: <div>User Payments</div> },
+      { path: 'profile', element: <div>User Profile</div> },
+      { path: 'reviews', element: <div>User Reviews</div> },
+
+      // admin routes
+      {
+        path: "admin",
+        element: (
+          <PrivateRoute role="admin">
+            <div>Admin Main</div>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "manage-products",
+        element: (
+          <PrivateRoute role="admin">
+            <div>Manage Products</div>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-product",
+        element: (
+          <PrivateRoute role="admin">
+            <div>Add Product</div>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "update-product/:id",
+        element: (
+          <PrivateRoute role="admin">
+            <div>Update Product</div>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "users",
+        element: (
+          <PrivateRoute role="admin">
+            <div>All Users</div>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "manage-orders",
+        element: (
+          <PrivateRoute role="admin">
+            <div>Manage Orders</div>
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
 ]);
 
 export default router;
