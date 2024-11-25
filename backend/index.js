@@ -10,6 +10,7 @@ const authRouter = require('./src/users/user.route')
 const productRouter = require('./src/products/products.route')
 const reviewRouter = require('./src/reviews/reviews.router')
 const ordersRouter = require('./src/orders/orders.route')
+const statsRouter = require('./src/stats/stats.route')
 
 app.use(express.json({ limit: '25mb' }));
 app.use(bodyParser.json());
@@ -25,6 +26,7 @@ app.use('/api/auth', authRouter)
 app.use('/api/products', productRouter)
 app.use('/api/reviews', reviewRouter)
 app.use('/api/orders', ordersRouter)
+app.use('/api/stats', statsRouter)
 
 async function main() {
   try {
