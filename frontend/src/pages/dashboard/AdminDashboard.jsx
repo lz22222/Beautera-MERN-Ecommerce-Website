@@ -36,7 +36,7 @@ const AdminDashboard = () => {
                 {/* Logo section */}
                 <div className='nav__logo'>
                     <Link to="/">Beautera<span>.</span></Link>
-                    <p className='text-xs italic'>User dashboard</p>
+                    <p className='text-xs italic'>Admin dashboard</p>
                 </div>
                 <hr className='mt-5' />
                 {/* Navigation links */}
