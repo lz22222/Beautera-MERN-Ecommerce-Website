@@ -9,6 +9,7 @@ import SingleProduct from "../pages/shop/productDetails/SingleProduct";
 import Login from '../components/Login'
 import Register from '../components/Register'
 import PaymentSuccess from '../components/PaymentSuccess'
+import PrivateRoute from './PrivateRoute'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,18 @@ const router = createBrowserRouter([
   {
 		path: '/register',
 		element: <Register />,
+	},
+  {
+		path: '/dashboard',
+		element: (
+			<PrivateRoute>
+				<DashboardLayout />
+			</PrivateRoute>
+		),
+		children: [
+			// user dashboard routes
+			{ path: '', element: <div>User Dashboard</div> },
+		],
 	},
 ]);
 
