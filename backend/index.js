@@ -11,6 +11,7 @@ const productRouter = require('./src/products/products.route')
 const reviewRouter = require('./src/reviews/reviews.router')
 const ordersRouter = require('./src/orders/orders.route')
 const statsRouter = require('./src/stats/stats.route')
+const uploadImage = require("./src/utils/uploadImage")
 
 app.use(express.json({ limit: '25mb' }));
 app.use(bodyParser.json());
@@ -27,6 +28,12 @@ app.use('/api/products', productRouter)
 app.use('/api/reviews', reviewRouter)
 app.use('/api/orders', ordersRouter)
 app.use('/api/stats', statsRouter)
+
+app.post('/uploadImage', (req, res) => {
+	uploadImage(req.body.image)
+		.then((url) => res.send(url))
+		.catch((err) => res.status(500).send(err))
+})
 
 async function main() {
   try {
