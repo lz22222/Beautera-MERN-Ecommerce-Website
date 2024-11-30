@@ -17,7 +17,6 @@ const TextInput = ({ label, name, value, onChange, type = "text", placeholder })
         type={type}           // Input type (e.g., text, number, email)
         name={name}           // Name attribute for the input
         id={name}             // ID for accessibility
-        placeholder={placeholder} // Placeholder text for the input
         value={value}         // Controlled value for the input
         onChange={onChange}   // Function to handle value change
         className="add-product-InputCSS" // Styling class

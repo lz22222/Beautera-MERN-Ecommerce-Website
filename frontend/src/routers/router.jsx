@@ -19,6 +19,7 @@ import UserReviews from '../pages/dashboard/user/UserReviews'
 import UserProfile from '../pages/dashboard/user/UserProfile'
 import AdminDMain from '../pages/dashboard/admin/dashboard/AdminDMain'
 import AddProduct from "../pages/dashboard/admin/addProduct/AddProduct";
+import ManageProduct from '../pages/dashboard/admin/manageProduct/ManageProduct'
 
 const router = createBrowserRouter([
   {
@@ -68,14 +69,14 @@ const router = createBrowserRouter([
 					</PrivateRoute>
 				),
 			},
-      {
-        path: "manage-products",
-        element: (
-          <PrivateRoute role="admin">
-            <div>Manage Products</div>
-          </PrivateRoute>
-        ),
-      },
+			{
+				path: 'manage-products',
+				element: (
+					<PrivateRoute role='admin'>
+						<ManageProduct />
+					</PrivateRoute>
+				),
+			},
       {
         path: "add-product",
         element: <PrivateRoute role="admin"><AddProduct/></PrivateRoute>

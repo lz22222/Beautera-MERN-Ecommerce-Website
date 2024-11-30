@@ -91,7 +91,6 @@ const AddProduct = () => {
                 <TextInput
                     label="Product Name"
                     name="name"
-                    placeholder="Ex: Diamond Earrings"
                     value={product.name}
                     onChange={handleChange}
                 />
@@ -119,7 +118,6 @@ const AddProduct = () => {
                     label="Price"
                     name="price"
                     type="number"
-                    placeholder="50"
                     value={product.price}
                     onChange={handleChange}
                 />
@@ -129,7 +127,6 @@ const AddProduct = () => {
                     name="image"
                     id="image"
                     value={(e) => setImage(e.target.value)}
-                    placeholder="Image"
                     setImage={setImage}
                 />
 
@@ -143,7 +140,6 @@ const AddProduct = () => {
                         id="description"
                         className="add-product-InputCSS"
                         value={product.description}
-                        placeholder="Write a product description"
                         onChange={handleChange}
                     ></textarea>
                 </div>
