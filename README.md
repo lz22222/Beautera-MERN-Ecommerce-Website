@@ -10,3 +10,5 @@
 * Go to the backend directory with the command ``` cd backend```
 + Then run `` npm install `` commend to download node dependencies
 - Finally, use ``npm run start:dev`` 
+
+https://github.com/user-attachments/assets/a9427cdc-f121-494d-9cdc-00fdf4bd7d45
